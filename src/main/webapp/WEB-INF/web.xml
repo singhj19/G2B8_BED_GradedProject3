@@ -6,29 +6,33 @@
 
 	<display-name>G2B8_BED_GradedProject3</display-name>
 
-	<absolute-ordering />
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
 
-	<!-- Spring MVC Configurations -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>com.g2b8.tta.g2b8_bed_gradedproject3.config.MyConfiguration</param-value>
+	</context-param>
 
-	<!-- Configure Spring MVC Dispatcher Servlet -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/servlet.xml</param-value>
+			<param-value />
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-<!-- 	<listener> -->
-<!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
-<!-- 	</listener> -->
-
-<!-- 	Set up URL mapping for Spring MVC Dispatcher Servlet -->
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 </web-app>

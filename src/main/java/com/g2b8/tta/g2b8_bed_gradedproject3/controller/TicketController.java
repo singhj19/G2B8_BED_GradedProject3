@@ -11,97 +11,92 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.g2b8.tta.g2b8_bed_gradedproject3.model.Ticket;
-import com.g2b8.tta.g2b8_bed_gradedproject3.repository.TicketRepository;
 import com.g2b8.tta.g2b8_bed_gradedproject3.service.TicketService;
-import com.g2b8.tta.g2b8_bed_gradedproject3.service.impl.TicketServiceImpl;
 
 @Controller
 @RequestMapping("/ticket")
 public class TicketController {
-	
-	    
-	    TicketService ticketService;
 
-	    @Autowired
-	    public void setTicketService(TicketService ticketService) {
-	        this.ticketService = ticketService;
-	    }
-	    @RequestMapping("/list")
-	    public String listAllTickets(Model model) {
-	    	
-	    	System.out.println("Reached list method in TicketController");
+	TicketService ticketService;
 
-	        List<Ticket> tickets = ticketService.list();
-	        model.addAttribute("tickets", tickets);
+	@Autowired
+	public void setTicketService(TicketService ticketService) {
+		this.ticketService = ticketService;
+	}
 
-	        return "list-tickets";
-	    }
+	@RequestMapping("/list")
+	public String listAllTickets(Model model) {
 
-	    @PostMapping("/save")
-	    public String saveEmployee(@ModelAttribute("ticket") Ticket ticket) {
+		System.out.println("Reached list method in TicketController");
 
-	        // save the employee
-	        ticketService.save(ticket);
+		List<Ticket> tickets = ticketService.list();
+		model.addAttribute("tickets", tickets);
 
-	        // use a redirect to prevent duplicate submissions
-	        return "redirect:/ticket/list";
-	    }
+		return "list-tickets";
+	}
 
-	    @RequestMapping("/showTicketForm_Save")
-	    public String saveEmployee_Step1(Model theModel) {
+	@PostMapping("/save")
+	public String saveEmployee(@ModelAttribute("ticket") Ticket ticket) {
 
-	        // create model attribute to bind form data
-	        Ticket ticket = new Ticket();
+		// save the employee
+		ticketService.save(ticket);
 
-	        theModel.addAttribute("ticket", ticket);
+		// use a redirect to prevent duplicate submissions
+		return "redirect:/ticket/list";
+	}
 
-	        return "ticket-form";
-	    }
+	@RequestMapping("/showTicketForm_Save")
+	public String saveEmployee_Step1(Model theModel) {
 
-	    @PostMapping("/view")
-	    public String viewTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
+		// create model attribute to bind form data
+		Ticket ticket = new Ticket();
 
-	        Ticket ticket = ticketService.getById(ticketId);
+		theModel.addAttribute("ticket", ticket);
 
-	        theModel.addAttribute("ticket", ticket);
+		return "ticket-form";
+	}
 
-	        // send over to our form
-	        return "view-ticket-form";
-	    }
+	@PostMapping("/view")
+	public String viewTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
 
-	    @PostMapping("/delete")
-	    public String deleteTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
+		Ticket ticket = ticketService.getById(ticketId);
 
-	        ticketService.deleteById(ticketId);
-	        return "redirect:/ticket/list";
+		theModel.addAttribute("ticket", ticket);
 
-	    }
+		// send over to our form
+		return "view-ticket-form";
+	}
 
-	    @PostMapping("/edit")
-	    public String editTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
+	@PostMapping("/delete")
+	public String deleteTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
 
-	        Ticket ticket = ticketService.getById(ticketId);
+		ticketService.deleteById(ticketId);
+		return "redirect:/ticket/list";
 
+	}
 
-	        theModel.addAttribute("ticket", ticket);
+	@PostMapping("/edit")
+	public String editTicket(@RequestParam("ticketId") long ticketId, Model theModel) {
 
-	        // send over to our form
-	        return "update-ticket-form";
-	    }
+		Ticket ticket = ticketService.getById(ticketId);
 
-	    @RequestMapping("/search")
-	    public String search(@RequestParam("contentORdescription") String contentORdescription, Model theModel) {
+		theModel.addAttribute("ticket", ticket);
 
-	        if (contentORdescription.trim().isEmpty()) {
-	            return "redirect:/ticket/list";
-	        } else {
-	            List<Ticket> tickets = ticketService.searchByCreatedOnEmpty(contentORdescription);
-	            theModel.addAttribute("tickets", tickets);
-	            return "list-tickets";
-	        }
+		// send over to our form
+		return "update-ticket-form";
+	}
 
-	    }
-	
-	
+	@RequestMapping("/search")
+	public String search(@RequestParam("contentORdescription") String contentORdescription, Model theModel) {
+
+		if (contentORdescription.trim().isEmpty()) {
+			return "redirect:/ticket/list";
+		} else {
+			List<Ticket> tickets = ticketService.searchByCreatedOnEmpty(contentORdescription);
+			theModel.addAttribute("tickets", tickets);
+			return "list-tickets";
+		}
+
+	}
 
 }
