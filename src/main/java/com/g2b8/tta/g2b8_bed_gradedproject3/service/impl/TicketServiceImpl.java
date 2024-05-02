@@ -23,7 +23,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<Ticket> list() {
-		System.out.println("Reached list method in TicketService");
 		return ticketRepository.getTickets();
 	}
 

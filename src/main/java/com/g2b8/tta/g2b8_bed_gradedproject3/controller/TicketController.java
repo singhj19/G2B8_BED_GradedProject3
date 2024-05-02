@@ -27,8 +27,6 @@ public class TicketController {
 	@RequestMapping("/list")
 	public String listAllTickets(Model model) {
 
-		System.out.println("Reached list method in TicketController");
-
 		List<Ticket> tickets = ticketService.list();
 		model.addAttribute("tickets", tickets);
 

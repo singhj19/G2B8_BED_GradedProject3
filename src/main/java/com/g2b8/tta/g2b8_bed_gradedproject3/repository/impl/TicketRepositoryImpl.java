@@ -36,7 +36,6 @@ public class TicketRepositoryImpl implements TicketRepository {
 		} catch (HibernateException e) {
 			session = sessionFactory.openSession();
 		}
-		System.out.println("reached repo method");
 		return session.createQuery("from Ticket", Ticket.class).list();
 	}
 
@@ -77,7 +76,6 @@ public class TicketRepositoryImpl implements TicketRepository {
 		} catch (HibernateException e) {
 			session = sessionFactory.openSession();
 		}
-
 		Ticket ticket = session.byId(Ticket.class).load(theId);
 		session.delete(ticket);
 	}
@@ -85,11 +83,15 @@ public class TicketRepositoryImpl implements TicketRepository {
 	@Transactional
 	@Override
 	public List<Ticket> findByTitleOrDescription(String titleOrDescription) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session;
+		try {
+			session = sessionFactory.getCurrentSession();
+		} catch (HibernateException e) {
+			session = sessionFactory.openSession();
+		}
 		Query<Ticket> query = session.createQuery(
 				"FROM Ticket t WHERE t.content LIKE :keyword OR t.shortDescription LIKE :keyword", Ticket.class);
 		query.setParameter("keyword", "%" + titleOrDescription + "%");
-
 		List<Ticket> tickets = query.getResultList();
 		return tickets;
 	}
