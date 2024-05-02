@@ -36,7 +36,6 @@ public class TicketRepositoryImpl implements TicketRepository {
 		} catch (HibernateException e) {
 			session = sessionFactory.openSession();
 		}
-		System.out.println("reached repo method");
 		return session.createQuery("from Ticket", Ticket.class).list();
 	}
 
