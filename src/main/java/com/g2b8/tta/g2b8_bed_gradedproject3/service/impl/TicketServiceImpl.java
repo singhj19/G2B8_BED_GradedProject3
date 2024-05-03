@@ -1,6 +1,5 @@
 package com.g2b8.tta.g2b8_bed_gradedproject3.service.impl;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +27,6 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public void save(Ticket ticket) {
 
-		LocalDate currentDate = LocalDate.now();
-		java.sql.Date sqlDate = java.sql.Date.valueOf(currentDate);
-
-		ticket.setCreatedOn(sqlDate);
 		ticketRepository.saveTicket(ticket);
 	}
 
