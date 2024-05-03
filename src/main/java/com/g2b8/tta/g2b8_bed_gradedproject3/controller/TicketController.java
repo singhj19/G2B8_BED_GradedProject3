@@ -35,6 +35,8 @@ public class TicketController {
 
 	@PostMapping("/save")
 	public String saveEmployee(@ModelAttribute("ticket") Ticket ticket) {
+		
+		System.out.println(ticket.getId());
 
 		// save the employee
 		ticketService.save(ticket);

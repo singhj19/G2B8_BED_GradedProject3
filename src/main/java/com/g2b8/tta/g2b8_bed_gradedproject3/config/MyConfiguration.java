@@ -3,8 +3,6 @@ package com.g2b8.tta.g2b8_bed_gradedproject3.config;
 import java.util.Properties;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-// used as in pers lap top - "fix project setup" if error Use above not the below one
-//import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
