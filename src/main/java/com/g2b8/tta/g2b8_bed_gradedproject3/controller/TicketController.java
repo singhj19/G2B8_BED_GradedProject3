@@ -85,12 +85,12 @@ public class TicketController {
 	}
 
 	@RequestMapping("/search")
-	public String search(@RequestParam("contentORdescription") String contentORdescription, Model theModel) {
+	public String search(@RequestParam("titleOrDescription") String titleOrDescription, Model theModel) {
 
-		if (contentORdescription.trim().isEmpty()) {
+		if (titleOrDescription.trim().isEmpty()) {
 			return "redirect:/ticket/list";
 		} else {
-			List<Ticket> tickets = ticketService.searchByCreatedOnEmpty(contentORdescription);
+			List<Ticket> tickets = ticketService.searchByTitleOrDescription(titleOrDescription);
 			theModel.addAttribute("tickets", tickets);
 			return "list-tickets";
 		}

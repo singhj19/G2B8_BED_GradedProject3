@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g2b8.tta.g2b8_bed_gradedproject3.model.Ticket;
-//import com.g2b8.tta.g2b8_bed_gradedproject3.repository.TicketRepoClass;
 import com.g2b8.tta.g2b8_bed_gradedproject3.repository.TicketRepository;
 import com.g2b8.tta.g2b8_bed_gradedproject3.service.TicketService;
 
@@ -47,8 +46,8 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<Ticket> searchByCreatedOnEmpty(String contentORdescription) {
-		List<Ticket> tickets = ticketRepository.findByTitleOrDescription(contentORdescription);
+	public List<Ticket> searchByTitleOrDescription(String titleOrDescription) {
+		List<Ticket> tickets = ticketRepository.findByTitleOrDescription(titleOrDescription);
 		return tickets;
 	}
 }
