@@ -18,10 +18,16 @@ th, td {
 	border: 1px solid #dddddd;
 	text-align: left;
 	padding: 8px;
+	vertical-align: top;
+	white-space: normal;
 }
 
 th {
 	background-color: #f2f2f2;
+}
+
+.content-cell {
+     word-wrap: break-word;
 }
 </style>
 </head>
@@ -59,7 +65,7 @@ th {
 								</tr>
 								<tr>
 									<td>Content:</td>
-									<td th:text="${ticket.content}"></td>
+									<td th:utext="${ticket.content}"></td>
 								</tr>
 								<tr>
 									<td>Created On:</td>
